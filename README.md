@@ -14,25 +14,26 @@ Proyek ini merupakan integrasi antara **ESP32-CAM** dan **MQTT** untuk sistem pe
 
 ---
 
-## 🗂️ Struktur Proyek
+## 📁 Project Structure
 
+```text
 MQTT_ESP32_cam/
-├── MQTT_ESP32_cam/ # Firmware untuk ESP32-CAM
-│ ├── MQTT_ESP32_cam.ino
-│ ├── app_httpd.cpp
-│ ├── camera_index.h
-│ ├── camera_pins.h
-│ ├── ci.json
-│ └── partitions.csv
+├── MQTT_ESP32_cam/                # Firmware untuk ESP32-CAM
+│   ├── MQTT_ESP32_cam.ino
+│   ├── app_httpd.cpp
+│   ├── camera_index.h
+│   ├── camera_pins.h
+│   ├── ci.json
+│   └── partitions.csv
 │
-└── Python_OpenCV/ # Klien Python untuk deteksi wajah
-├── main.py
-├── known_faces/
-│ ├── Pace.jpg
-│ ├── Riski.jpg
-│ ├── Ucin.jpg
-│ └── azza.jpg
-└── .idea/ # Konfigurasi IDE (opsional)
+├── Python_OpenCV/                 # Klien Python untuk deteksi wajah
+│   ├── main.py
+│   ├── known_faces/
+│   │   ├── Pace.jpg
+│   │   ├── Riski.jpg
+│   │   ├── Ucin.jpg
+│   │   └── azza.jpg
+│   └── .idea/                     # Konfigurasi IDE (opsional)
 
 ---
 
