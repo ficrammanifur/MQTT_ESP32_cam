@@ -1,9 +1,20 @@
-# 📷 MQTT_ESP32_cam
+<h1 align="center">📷 MQTT_ESP32_cam</h1>
 
-Proyek ini merupakan integrasi antara **ESP32-CAM** dan **MQTT** untuk sistem pengiriman data video/gambar serta monitoring menggunakan **Python + OpenCV**.
+<p align="center">
+  <img src="https://img.shields.io/badge/last%20commit-today-brightgreen" />
+  <img src="https://img.shields.io/badge/language-C%2B%2B%20%7C%20Python-blue" />
+  <img src="https://img.shields.io/badge/platform-ESP32--CAM-informational" />
+  <img src="https://img.shields.io/badge/protocol-MQTT-green" />
+  <img src="https://img.shields.io/badge/computer_vision-OpenCV-orange" />
+  <img src="https://img.shields.io/badge/face_detection-face__recognition-yellow" />
+</p>
+
+<p align="center">
+  Prototipe robot yang meniru gerakan tangan manusia secara real-time menggunakan Mediapipe dan ESP32
+</p>
+
 
 ---
-
 ## 🚀 Fitur Utama
 
 - 📡 Komunikasi **ESP32-CAM** dengan MQTT broker.
@@ -34,19 +45,20 @@ MQTT_ESP32_cam/
 │   │   ├── Ucin.jpg
 │   │   └── azza.jpg
 │   └── .idea/                     # Konfigurasi IDE (opsional)
+```
 
 ---
 
 ## 🔧 Tools & Library
 
 ### Hardware:
-- ESP32-CAM
-- Breadboard, sensor (opsional)
+- **ESP32-CAM**
+- **Breadboard, sensor (opsional)**
 
 ### Software:
 - [Arduino IDE](https://www.arduino.cc/en/software)
 - [Mosquitto MQTT Broker](https://mosquitto.org/)
-- Python 3.10+
+- **Python 3.10+**
   - `opencv-python`
   - `paho-mqtt`
   - `face_recognition`
@@ -57,31 +69,133 @@ MQTT_ESP32_cam/
 ## 🧪 Cara Menjalankan
 
 ### 1. Upload ke ESP32-CAM
-- Buka `MQTT_ESP32_cam.ino` di Arduino IDE.
-- Pastikan library dan board sudah terpasang.
-- Edit WiFi dan MQTT broker info:
-  ```cpp
-  const char* ssid = "WIFI_KAMU";
-  const char* password = "PASSWORD_WIFI";
-  const char* mqtt_server = "192.168.x.x";
-Upload sketch.
 
-2. Jalankan Python Klien
-bash
-Copy
-Edit
+1. Buka `MQTT_ESP32_cam.ino` di Arduino IDE.
+2. Pastikan library dan board sudah terpasang.
+3. Edit WiFi dan MQTT broker info:
+
+```cpp
+const char* ssid = "WIFI_KAMU";
+const char* password = "PASSWORD_WIFI";
+const char* mqtt_server = "192.168.x.x";
+```
+
+4. Upload sketch.
+
+### 2. Jalankan Python Klien
+
+```bash
 cd Python_OpenCV
-pip install opencv-python paho-mqtt face_recognition
+pip install opencv-python paho-mqtt face_recognition numpy
 python main.py
-⚠️ Catatan
-Folder .idea/ bisa diabaikan (file internal dari PyCharm/IDE).
+```
 
-Gambar di known_faces/ digunakan untuk proses deteksi wajah.
+---
 
-Gunakan .gitignore untuk mengecualikan file IDE dan cache.
+## 📋 Konfigurasi MQTT
 
-🙋 Kontributor
-👨‍💻 @ficrammanifur
+### Broker Settings
+- **Host**: `192.168.x.x` (sesuaikan dengan IP broker Anda)
+- **Port**: `1883` (default MQTT)
+- **Topics**:
+  - `esp32cam/image` - untuk pengiriman gambar
+  - `esp32cam/command` - untuk perintah kontrol
+  - `esp32cam/status` - untuk status device
 
-📄 Lisensi
-Proyek ini bersifat open-source dan dapat digunakan untuk keperluan pembelajaran, pengembangan, dan riset tanpa batasan.
+### ESP32-CAM Configuration
+
+```cpp
+// WiFi Configuration
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+// MQTT Configuration
+const char* mqtt_server = "YOUR_MQTT_BROKER_IP";
+const int mqtt_port = 1883;
+const char* mqtt_user = "username";     // opsional
+const char* mqtt_password = "password"; // opsional
+```
+
+---
+
+## 🎯 Cara Kerja Sistem
+
+### 1. ESP32-CAM
+- Menginisialisasi kamera dan koneksi WiFi
+- Terhubung ke MQTT broker
+- Mengambil gambar berdasarkan trigger atau perintah
+- Mengirim data gambar melalui MQTT
+
+### 2. Python Client
+- Subscribe ke topic MQTT untuk menerima gambar
+- Memproses gambar menggunakan OpenCV
+- Melakukan deteksi wajah dengan `face_recognition`
+- Menampilkan hasil deteksi secara real-time
+
+### 3. Face Recognition
+- Memuat gambar referensi dari folder `known_faces/`
+- Membandingkan wajah yang terdeteksi dengan database
+- Menampilkan nama jika wajah dikenali
+
+---
+
+## 🔍 Troubleshooting
+
+### ESP32-CAM Tidak Terhubung
+- Periksa koneksi WiFi dan kredensial
+- Pastikan MQTT broker dapat diakses
+- Cek Serial Monitor untuk pesan error
+
+### Python Client Error
+- Pastikan semua dependencies terinstall
+- Periksa koneksi ke MQTT broker
+- Verifikasi format gambar yang diterima
+
+### Face Recognition Tidak Akurat
+- Gunakan gambar referensi dengan kualitas baik
+- Pastikan pencahayaan cukup saat pengambilan gambar
+- Sesuaikan threshold deteksi jika diperlukan
+
+---
+
+## 📊 Performance Tips
+
+- Gunakan resolusi gambar yang sesuai (tidak terlalu tinggi)
+- Optimalkan interval pengiriman gambar
+- Implementasi buffer untuk menghindari lag
+- Gunakan kompresi JPEG untuk mengurangi ukuran data
+
+---
+
+## 🔮 Pengembangan Selanjutnya
+
+- [ ] Implementasi enkripsi untuk keamanan data
+- [ ] Web interface untuk monitoring
+- [ ] Database logging untuk riwayat deteksi
+- [ ] Multiple camera support
+- [ ] Real-time streaming video
+- [ ] Mobile app integration
+
+---
+
+## ⚠️ Catatan
+
+- Folder `.idea/` bisa diabaikan (file internal dari PyCharm/IDE).
+- Gambar di `known_faces/` digunakan untuk proses deteksi wajah.
+- Gunakan `.gitignore` untuk mengecualikan file IDE dan cache.
+- Pastikan ESP32-CAM memiliki power supply yang cukup.
+
+---
+
+## 🙋 Kontributor
+
+👨‍💻 [@ficrammanifur](https://github.com/ficrammanifur)
+
+
+<div align="center">
+
+**⭐ Star this repository if you find it helpful!**
+
+<p><a href="#top">⬆ Kembali ke Atas</a></p>
+
+</div>
