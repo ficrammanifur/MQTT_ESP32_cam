@@ -16,8 +16,8 @@
   <img src="https://img.shields.io/badge/computer_vision-OpenCV-orange" />
   <img src="https://img.shields.io/badge/face_detection-face__recognition-yellow" />
   <img src="https://img.shields.io/badge/security-access__control-red" />
-  <a href="https://github.com/ficrammanifur/esp32cam-face-recognition/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" />
+  <a href="https://github.com/ficrammanifur/ficrammanifur/blob/main/LICENSE">
+      <img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" />
   </a>
 </p>
 
@@ -87,7 +87,7 @@
 ### 🔗 Diagram Blok Sistem
 
 ```text
-┌─────────────────┐    WiFi     ┌──────────────────────┐    MQTT    ┌─────────────────┐
+┌─────────────────┐    WiFi    ┌──────────────────────┐    MQTT    ┌─────────────────┐
 │   ESP32-CAM     │ ◄────────► │   WiFi Router        │ ◄────────► │  MQTT Broker    │
 │  • Camera       │            │                      │            │ (Mosquitto)     │
 │  • WiFi Module  │            │                      │            │                 │
